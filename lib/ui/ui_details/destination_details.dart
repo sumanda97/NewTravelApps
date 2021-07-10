@@ -21,7 +21,7 @@ class DestinationDetailsPage extends StatelessWidget {
                 (int index) => Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                       image: CachedNetworkImageProvider(
                           recommendedModel.images[index]),
                     ),
@@ -128,10 +128,10 @@ class DestinationDetailsPage extends StatelessWidget {
                               ),
                               FittedBox(
                                 child: Text(
-                                  '\IDR ${recommendedModel.price.toString()} K / person',
+                                  '\IDR ${recommendedModel.price.toString()} K / Person',
                                   style: GoogleFonts.lato(
                                       fontWeight: FontWeight.w700,
-                                      color: Colors.white),
+                                      color: greyColor),
                                 ),
                               )
                             ],
@@ -141,7 +141,7 @@ class DestinationDetailsPage extends StatelessWidget {
                           height: 62.4,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(9.6),
-                              color: Colors.white),
+                              color: greyColor),
                           child: Align(
                             alignment: Alignment.center,
                             child: Container(
@@ -151,7 +151,7 @@ class DestinationDetailsPage extends StatelessWidget {
                                   'Books Now',
                                   style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.w700,
-                                      color: blueColor),
+                                      color: blackColor),
                                 ),
                               ),
                             ),

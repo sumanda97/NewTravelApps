@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:wisata/ui/ui.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xFF3EBACE),
         accentColor: Color(0xFFD8ECF1),
-        scaffoldBackgroundColor: Color(0xFFEDEDED),
+        scaffoldBackgroundColor: Colors.white,
       ),
       home: HomePage(),
     );

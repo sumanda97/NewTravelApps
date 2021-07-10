@@ -114,7 +114,10 @@ class _HotelDetailsState extends State<HotelDetails> {
               SizedBox(
                 height: 15,
               ),
-              _buildRatingStars(widget.hotel.rate),
+              // _buildRatingStars(widget.hotel.rate),
+              RatingStars(
+                rate: widget.hotel.rate,
+              ),
               SizedBox(
                 height: 10,
               ),

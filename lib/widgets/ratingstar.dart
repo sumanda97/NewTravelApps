@@ -14,7 +14,7 @@ class RatingStars extends StatelessWidget {
             (index) => Icon(
                 (index < numberofStars) ? MdiIcons.star : MdiIcons.starOutline,
                 size: 20,
-                color: Colors.yellowAccent),
+                color: Colors.yellow),
           ) +
           [
             SizedBox(

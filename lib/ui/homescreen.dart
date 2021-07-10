@@ -7,8 +7,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _pageController = PageController(viewportFraction: 0.877);
+
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
+    double listItemWidth =
+        MediaQuery.of(context).size.width - 2 * defaultMargin;
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -64,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 image: DecorationImage(
-                                    image: AssetImage(
+                                    image: CachedNetworkImageProvider(
                                         recommendations[index].imageUrl),
                                     fit: BoxFit.cover)),
                             child: Stack(
@@ -82,14 +86,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                           WidgetSpan(
                                               child: Icon(
                                             MdiIcons.mapMarkerOutline,
-                                            size: 18,
+                                            size: 20,
                                             color: blueColor,
                                           )),
                                           TextSpan(
-                                            text: recommendations[index].city,
+                                            text:
+                                                recommendations[index].country,
                                             style: GoogleFonts.poppins(
                                                 fontSize: 18,
-                                                color: mainColor,
+                                                color: Colors.white,
                                                 fontWeight: FontWeight.w600,
                                                 letterSpacing: 1.2),
                                           ),
@@ -100,14 +105,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                         text: TextSpan(children: [
                                           WidgetSpan(
                                               child: Icon(MdiIcons.star,
-                                                  size: 18, color: blueColor)),
+                                                  size: 18,
+                                                  color: Colors.yellow)),
                                           TextSpan(
                                             text: recommendations[index]
                                                 .rate
                                                 .toString(),
                                             style: GoogleFonts.poppins(
                                                 fontSize: 18,
-                                                color: mainColor,
+                                                color: Colors.white,
                                                 fontWeight: FontWeight.w600,
                                                 letterSpacing: 1.2),
                                           ),
@@ -125,30 +131,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       Text(recommendations[index].name,
                                           style: GoogleFonts.poppins(
-                                              fontSize: 18,
+                                              fontSize: 22,
                                               color: mainColor,
                                               fontWeight: FontWeight.w600,
                                               letterSpacing: 1.2)),
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            FontAwesomeIcons.locationArrow,
-                                            size: 15,
-                                            color: blueColor,
-                                          ),
-                                          SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                            recommendations[index].country,
-                                            style: GoogleFonts.poppins(
-                                                fontSize: 18,
-                                                color: mainColor,
-                                                fontWeight: FontWeight.w400,
-                                                letterSpacing: 1.2),
-                                          ),
-                                        ],
-                                      )
+                                      // IF YOU WANT CITY LOCATION
+                                      // Row(
+                                      //   children: [
+                                      //     Icon(
+                                      //       FontAwesomeIcons.locationArrow,
+                                      //       size: 15,
+                                      //       color: blueColor,
+                                      //     ),
+                                      //     SizedBox(
+                                      //       width: 5,
+                                      //     ),
+                                      //     Text(
+                                      //       recommendations[index].country,
+                                      //       style: GoogleFonts.poppins(
+                                      //           fontSize: 18,
+                                      //           color: mainColor,
+                                      //           fontWeight: FontWeight.w400,
+                                      //           letterSpacing: 1.2),
+                                      //     ),
+                                      //   ],
+                                      // )
                                     ],
                                   ),
                                 ),
@@ -163,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             // POPULAR CATEGORIES
             Padding(
-              padding: EdgeInsets.only(top: 48, left: 28, right: 28),
+              padding: EdgeInsets.symmetric(horizontal: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -176,66 +183,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text("View All",
                       style: GoogleFonts.playfairDisplay(
                         fontSize: 16,
+                        letterSpacing: 0.5,
                         fontWeight: FontWeight.w600,
-                        color: Colors.blue[600],
+                        color: redColor,
                       )),
                 ],
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
             // LIST CATEGORIES
-            Container(
-              margin: EdgeInsets.only(top: 33),
-              height: 45,
-              child: ListView.builder(
-                  itemCount: populars.length,
-                  scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
-                  padding: EdgeInsets.only(left: 28, right: 9),
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: EdgeInsets.only(right: 19),
-                      height: 45,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(9),
-                        color: Color(populars[index].color),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(width: 19),
-                          Image.asset(
-                            populars[index].image,
-                            height: 20,
-                          ),
-                          SizedBox(width: 19),
-                        ],
-                      ),
-                    );
-                  }),
-            ),
-            //LIST  BEACH
-            Container(
-              margin: EdgeInsets.only(top: 28, bottom: 16),
-              height: 124,
-              child: ListView.builder(
-                  itemCount: beaches.length,
-                  padding: EdgeInsets.only(left: 28, right: 12),
-                  scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return Container(
-                      height: 124,
-                      width: 188,
-                      margin: EdgeInsets.only(right: 18),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(9),
-                          image: DecorationImage(
-                              image: NetworkImage(beaches[index].image),
-                              fit: BoxFit.cover)),
-                    );
-                  }),
-            ),
+
             // HOTEL TAB BAR
             hotelRecommentadion(),
             SizedBox(height: 30),
@@ -257,14 +216,14 @@ Widget costumTabBarListDestination() {
           labelPadding: EdgeInsets.only(left: 14.4, right: 14.4),
           indicatorPadding: EdgeInsets.only(left: 14.4, right: 14.4),
           isScrollable: true,
-          labelColor: Color(0xFF000000),
+          labelColor: redColor,
           unselectedLabelColor: Color(0xFF8a8a8a),
           labelStyle:
               GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w700),
           unselectedLabelStyle:
               GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w700),
           indicator: RoundedRectangleTabIndicator(
-              color: Color(0xFF000000), weight: 2.4, width: 14.4),
+              color: redColor, weight: 2.4, width: 14.4),
           tabs: [
             Tab(
               child: Container(
@@ -303,9 +262,10 @@ Widget hotelRecommentadion() {
             Text(
               "Popular Hotel",
               style: GoogleFonts.playfairDisplay(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 1.5),
+                fontSize: 28,
+                fontWeight: FontWeight.w600,
+                color: Colors.black87,
+              ),
             ),
             GestureDetector(
               onTap: () {},
@@ -315,7 +275,7 @@ Widget hotelRecommentadion() {
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     letterSpacing: 0.5,
-                    color: Colors.blue[600]),
+                    color: redColor),
               ),
             ),
           ],
@@ -380,11 +340,14 @@ Widget hotelRecommentadion() {
                                       height: 5,
                                     ),
                                     Text(
-                                      "\IDR ${hotel.price}K Night",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.w600),
+                                      NumberFormat.currency(
+                                                  symbol: "IDR ",
+                                                  decimalDigits: 0,
+                                                  locale: "id-ID")
+                                              .format(hotel.price) +
+                                          " Night",
+                                      style:
+                                          greyFontStyle.copyWith(fontSize: 13),
                                     )
                                   ],
                                 ),
