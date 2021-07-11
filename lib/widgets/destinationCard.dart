@@ -113,7 +113,8 @@ class DestinationCard extends StatelessWidget {
                             child: Image(
                               height: 180,
                               width: 220,
-                              image: NetworkImage(catDestination.image),
+                              image: CachedNetworkImageProvider(
+                                  catDestination.image),
                               fit: BoxFit.cover,
                             ),
                           ),

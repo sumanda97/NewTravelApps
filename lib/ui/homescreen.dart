@@ -9,6 +9,15 @@ class _HomeScreenState extends State<HomeScreen> {
   final _pageController = PageController(viewportFraction: 0.877);
 
   int selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  Future loadData() async {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
