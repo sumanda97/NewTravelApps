@@ -11,8 +11,6 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    double listItemWidth =
-        MediaQuery.of(context).size.width - 2 * defaultMargin;
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -38,10 +36,34 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             // HEADER
             SizedBox(
+              height: 15,
+            ),
+            searchButton(),
+            SizedBox(
               height: 20,
             ),
             //ICON Tab Bar
-            costumTabBarListDestination(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Popular Tour",
+                      style: GoogleFonts.playfairDisplay(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
+                      )),
+                  Text("View All",
+                      style: GoogleFonts.playfairDisplay(
+                        fontSize: 16,
+                        letterSpacing: 0.5,
+                        fontWeight: FontWeight.w600,
+                        color: redColor,
+                      )),
+                ],
+              ),
+            ),
             SizedBox(
               height: 15,
             ),
@@ -168,33 +190,8 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 5,
             ),
-            // POPULAR CATEGORIES
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Popular Categories",
-                      style: GoogleFonts.playfairDisplay(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black87,
-                      )),
-                  Text("View All",
-                      style: GoogleFonts.playfairDisplay(
-                        fontSize: 16,
-                        letterSpacing: 0.5,
-                        fontWeight: FontWeight.w600,
-                        color: redColor,
-                      )),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            // LIST CATEGORIES
-
+            // POPULAR DESTINATION
+            DestinationCard(),
             // HOTEL TAB BAR
             hotelRecommentadion(),
             SizedBox(height: 30),
@@ -211,7 +208,7 @@ Widget costumTabBarListDestination() {
     height: 30,
     margin: EdgeInsets.only(left: 14.4, top: 28.8),
     child: DefaultTabController(
-      length: 4,
+      length: 3,
       child: TabBar(
           labelPadding: EdgeInsets.only(left: 14.4, right: 14.4),
           indicatorPadding: EdgeInsets.only(left: 14.4, right: 14.4),
@@ -240,11 +237,6 @@ Widget costumTabBarListDestination() {
                 child: Text('New Destination'),
               ),
             ),
-            Tab(
-              child: Container(
-                child: Text('Hidden Gems'),
-              ),
-            )
           ]),
     ),
   );
@@ -389,5 +381,27 @@ Widget hotelRecommentadion() {
         ),
       ),
     ],
+  );
+}
+
+Widget searchButton() {
+  return Container(
+    padding: EdgeInsets.all(5),
+    margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+    decoration: BoxDecoration(
+        border: Border.all(color: Colors.black87),
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white),
+    child: TextField(
+      decoration: InputDecoration(
+        border: InputBorder.none,
+        prefixIcon: Icon(
+          Icons.search,
+          color: Colors.black26,
+        ),
+        hintStyle: blackFontStyle2.copyWith(fontSize: 15, color: Colors.grey),
+        hintText: "Search you're looking for",
+      ),
+    ),
   );
 }
